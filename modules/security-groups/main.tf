@@ -7,6 +7,7 @@ resource "aws_security_group" "frontend" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "SSH - Change this to your IP for security"
   }
 
   ingress {
@@ -14,6 +15,7 @@ resource "aws_security_group" "frontend" {
     to_port     = 3000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "Frontend React App"
   }
 
   egress {
@@ -37,6 +39,7 @@ resource "aws_security_group" "backend" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "SSH - Change this to your IP for security"
   }
 
   ingress {
@@ -44,6 +47,7 @@ resource "aws_security_group" "backend" {
     to_port     = 5000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "Backend Node.js API"
   }
 
   egress {
@@ -67,6 +71,7 @@ resource "aws_security_group" "rds" {
     to_port         = 3306
     protocol        = "tcp"
     security_groups = [aws_security_group.backend.id]
+    description     = "MySQL from Backend EC2"
   }
 
   egress {
